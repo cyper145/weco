@@ -10,27 +10,27 @@
     </title>
     <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
         @Html.DevExpress().GetStyleSheets(
-        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.VerticalGrid },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.CardView },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.RichEdit },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.Spreadsheet },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.Gantt },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.Diagram },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.Chart },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.ClientRichEdit },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.Dashboard },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.SpellChecker },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.QueryBuilder }
-    )
-    @Html.DevExpress().GetScripts( 
+     new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.VerticalGrid },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.CardView },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.RichEdit },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.Spreadsheet },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.Gantt },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.Diagram },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.Chart },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.ClientRichEdit },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.Dashboard },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.SpellChecker },
+     new StyleSheet { ExtensionSuite = ExtensionSuite.QueryBuilder }
+ )
+    @Html.DevExpress().GetScripts(
         new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
         new Script { ExtensionSuite = ExtensionSuite.Editors },
         new Script { ExtensionSuite = ExtensionSuite.GridView },
@@ -70,8 +70,10 @@
     </script>
 </head>
 <body>
-    @using(Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "signOutForm" })) {
-        @Html.AntiForgeryToken();
+    
+    @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "signOutForm" })) {
+            if (AuthHelper.IsAuthenticated()) { @Html.AntiForgeryToken();
+        }
     }
     <div class="content-wrapper">
         @Html.DevExpress().Panel(settings => {

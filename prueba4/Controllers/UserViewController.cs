@@ -160,5 +160,79 @@ namespace prueba4.Controllers
             }
             return PartialView("~/Views/GridView/_userViewPartial.cshtml", model.ToList());
         }
+
+        prueba4.Models.dbwencoEntities db1 = new prueba4.Models.dbwencoEntities();
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial()
+        {
+            var model = db1.Dk_user;
+            return PartialView("_GridViewPartial", model.ToList());
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialAddNew(prueba4.Models.Dk_user item)
+        {
+            var model = db1.Dk_user;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.Add(item);
+                    db1.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_GridViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialUpdate(prueba4.Models.Dk_user item)
+        {
+            var model = db1.Dk_user;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var modelItem = model.FirstOrDefault(it => it.id == item.id);
+                    if (modelItem != null)
+                    {
+                        this.UpdateModel(modelItem);
+                        db1.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_GridViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialDelete(System.Int32 id)
+        {
+            var model = db1.Dk_user;
+            if (id >= 0)
+            {
+                try
+                {
+                    var item = model.FirstOrDefault(it => it.id == id);
+                    if (item != null)
+                        model.Remove(item);
+                    db1.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            return PartialView("_GridViewPartial", model.ToList());
+        }
     }
 }
