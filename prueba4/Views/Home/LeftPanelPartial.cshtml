@@ -1,0 +1,46 @@
+<h3 class="section-caption contents-caption"> Menú</h3>
+
+@Html.DevExpress().NavBar(
+       settings =>
+       {
+           int rol = HttpContext.Current.Session["Rol"]==null? 0 : (int)HttpContext.Current.Session["Rol"];
+           settings.Name = "nbFeatures";
+           settings.AllowExpanding = true;
+           settings.AllowSelectItem = true;
+           settings.AutoCollapse = false;
+           settings.EnableHotTrack = true;
+           settings.EnableAnimation = true;
+           settings.SaveStateToCookies = false;
+           settings.Width = Unit.Parse("100%");
+
+           settings.Groups.Add(group =>
+           {
+               if ( rol == 1)
+               {
+                   group.Visible = true;
+               }
+               else
+               {
+                   group.Visible = false;
+               }
+               group.Text = "Administracion";
+               group.Items.Add("usuarios", "ratas", "~/Content/NavBar/BO_Scheduler.png", "usuarios");
+               group.Items.Add("Roles", "ratitas", "~/Content/NavBar/BO_Organizations.png", "roles");
+           });
+           settings.Groups.Add(group =>
+           {
+
+               if (rol == 2 || rol==1)
+               {
+                   group.Visible = true;
+               }
+               else
+               {
+                   group.Visible = false;
+               }
+               group.Text = "Compras";
+               group.Items.Add("orden compra", "", "~/Content/NavBar/BO_Notes_Large.png", "compras");
+               group.Items.Add("compras", "", "~/Content/NavBar/BO_Reports_Large.png", "compras");
+           });
+       }).GetHtml()
+

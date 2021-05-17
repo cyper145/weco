@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbwencoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dk_rol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="descriptiom" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Dk_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="150" />
+          <Property Name="password" Type="varchar" MaxLength="150" />
+          <Property Name="rol_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_Dk_user_Dk_rol">
+          <End Role="Dk_rol" Type="Self.Dk_rol" Multiplicity="0..1" />
+          <End Role="Dk_user" Type="Self.Dk_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dk_rol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Dk_user">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbwencoModelStoreContainer">
+          <EntitySet Name="Dk_rol" EntityType="Self.Dk_rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dk_user" EntityType="Self.Dk_user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Dk_user_Dk_rol" Association="Self.FK_Dk_user_Dk_rol">
+            <End Role="Dk_rol" EntitySet="Dk_rol" />
+            <End Role="Dk_user" EntitySet="Dk_user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbwencoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dk_rol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descriptiom" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Dk_user" Relationship="Self.FK_Dk_user_Dk_rol" FromRole="Dk_rol" ToRole="Dk_user" />
+        </EntityType>
+        <EntityType Name="Dk_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="rol_id" Type="Int32" />
+          <NavigationProperty Name="Dk_rol" Relationship="Self.FK_Dk_user_Dk_rol" FromRole="Dk_user" ToRole="Dk_rol" />
+        </EntityType>
+        <Association Name="FK_Dk_user_Dk_rol">
+          <End Role="Dk_rol" Type="Self.Dk_rol" Multiplicity="0..1" />
+          <End Role="Dk_user" Type="Self.Dk_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dk_rol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Dk_user">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbwencoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dk_rol" EntityType="Self.Dk_rol" />
+          <EntitySet Name="Dk_user" EntityType="Self.Dk_user" />
+          <AssociationSet Name="FK_Dk_user_Dk_rol" Association="Self.FK_Dk_user_Dk_rol">
+            <End Role="Dk_rol" EntitySet="Dk_rol" />
+            <End Role="Dk_user" EntitySet="Dk_user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbwencoModelStoreContainer" CdmEntityContainer="dbwencoEntities">
+          <EntitySetMapping Name="Dk_rol">
+            <EntityTypeMapping TypeName="dbwencoModel.Dk_rol">
+              <MappingFragment StoreEntitySet="Dk_rol">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="descriptiom" ColumnName="descriptiom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dk_user">
+            <EntityTypeMapping TypeName="dbwencoModel.Dk_user">
+              <MappingFragment StoreEntitySet="Dk_user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

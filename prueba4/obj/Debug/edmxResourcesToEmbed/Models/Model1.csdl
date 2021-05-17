@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbwencoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Dk_rol">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="descriptiom" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Dk_user" Relationship="Self.FK_Dk_user_Dk_rol" FromRole="Dk_rol" ToRole="Dk_user" />
+  </EntityType>
+  <EntityType Name="Dk_user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="rol_id" Type="Int32" />
+    <NavigationProperty Name="Dk_rol" Relationship="Self.FK_Dk_user_Dk_rol" FromRole="Dk_user" ToRole="Dk_rol" />
+  </EntityType>
+  <Association Name="FK_Dk_user_Dk_rol">
+    <End Role="Dk_rol" Type="Self.Dk_rol" Multiplicity="0..1" />
+    <End Role="Dk_user" Type="Self.Dk_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dk_rol">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Dk_user">
+        <PropertyRef Name="rol_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbwencoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Dk_rol" EntityType="Self.Dk_rol" />
+    <EntitySet Name="Dk_user" EntityType="Self.Dk_user" />
+    <AssociationSet Name="FK_Dk_user_Dk_rol" Association="Self.FK_Dk_user_Dk_rol">
+      <End Role="Dk_rol" EntitySet="Dk_rol" />
+      <End Role="Dk_user" EntitySet="Dk_user" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

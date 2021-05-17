@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbwencoModelStoreContainer" CdmEntityContainer="dbwencoEntities">
+    <EntitySetMapping Name="Dk_rol">
+      <EntityTypeMapping TypeName="dbwencoModel.Dk_rol">
+        <MappingFragment StoreEntitySet="Dk_rol">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="descriptiom" ColumnName="descriptiom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dk_user">
+      <EntityTypeMapping TypeName="dbwencoModel.Dk_user">
+        <MappingFragment StoreEntitySet="Dk_user">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

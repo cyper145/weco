@@ -1,0 +1,23 @@
+@Model prueba4.Models.Dk_user
+
+
+@{
+    var avatarUrl = string.IsNullOrEmpty(null) ? "Content/Images/user.svg" : "Content/Images/user.svg";
+}
+<div class="user-info">
+    <div class="avatar">
+        <img id="AvatarUrl" src="@Url.Content(avatarUrl)" />
+    </div>
+    <div class="text-container">
+        @Html.DevExpress().Label(labelSettings => {
+           labelSettings.Name = "userNameLabel";
+           labelSettings.Text = Model.email + " (" + Model.name + " " + Model.name + ")";
+           labelSettings.ControlStyle.CssClass = "user-name";
+       }).GetHtml()
+       @Html.DevExpress().Label(labelSettings => {
+           labelSettings.Name = "emailLabel";
+           labelSettings.Text = Model.email;
+           labelSettings.ControlStyle.CssClass = "email";
+       }).GetHtml()
+    </div>
+</div>
