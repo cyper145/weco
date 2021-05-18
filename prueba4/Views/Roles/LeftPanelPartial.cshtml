@@ -25,7 +25,7 @@
                    group.Visible = false;
                }
                group.Text = "Administracion";
-               group.Items.Add("usuarios", "ratas", "~/Content/NavBar/BO_Scheduler.png", "usuarios");
+               group.Items.Add("usuarios", "ratas", "~/Content/NavBar/BO_Scheduler.png", "userview");
                group.Items.Add("Roles", "ratitas", "~/Content/NavBar/BO_Organizations.png", "roles");
            });
            settings.Groups.Add(group =>
@@ -40,8 +40,8 @@
                    group.Visible = false;
                }
                group.Text = "Compras";
-               group.Items.Add("orden compra", "", "~/Content/NavBar/BO_Notes_Large.png", "compras");
-               group.Items.Add("compras", "", "~/Content/NavBar/BO_Reports_Large.png", "compras");
+               group.Items.Add("orden compra", "", "~/Content/NavBar/BO_Notes_Large.png", "Home");
+               group.Items.Add("compras", "", "~/Content/NavBar/BO_Reports_Large.png", "Home");
            });
        }).GetHtml()
 
